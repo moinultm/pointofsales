@@ -21,8 +21,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function getIndex()
     {
         return view('home');
     }
 }
+
+//Require to implement this LOG Activity
+//https://itsolutionstuff.com/post/custom-user-log-activity-in-laravel-5-app-exampleexample.html
