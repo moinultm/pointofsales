@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $users = User::orderBy('first_name', 'asc');
+        $users = User::orderBy('first_name', 'asc')->whereId(auth()->user()->id);
         return view('users.index')->withUsers($users->paginate(20));
     }
 

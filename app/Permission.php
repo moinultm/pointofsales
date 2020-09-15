@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    use Notifiable;
-    use SoftDeletes;
-
 
     public $timestamps = false;
 
