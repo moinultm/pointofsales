@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'HomeController@getIndex')->name('home');
 
-
-
 /*========================================================
     User route
 =========================================================*/

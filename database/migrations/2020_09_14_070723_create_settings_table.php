@@ -36,6 +36,7 @@ class CreateSettingsTable extends Migration
             $table->string('vat_no')->nullable();
             $table->string('currency_code')->nullable();
             $table->integer('alert_quantity')->nullable();
+            $table->double('product_tax')->nullable();
             $table->boolean('enable_purchaser')->default(1);
             $table->boolean('enable_customer')->default(1);
             $table->timestamps();

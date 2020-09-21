@@ -23,5 +23,10 @@ class UserController extends Controller
 
 
 
+    public function viewProfile()
+    {
+        $user = \Auth::user();
+        return view('users.profile')->withUser($user);
+    }
 
 }
