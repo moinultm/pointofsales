@@ -17,7 +17,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="index.html">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Home</span></a>
     </li>
 
     <!-- Divider -->
@@ -105,13 +105,29 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Settings</span>
+        </a>
+        <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Site info:</h6>
+                <a class="collapse-item" href="login.html">Site Settings</a>
+                <a class="collapse-item" href="login.html">Backup</a>
+                <a class="collapse-item" href="login.html">Branches</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseACL" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-user"></i>
-            <span>ACL</span>
+            <span>User Access</span>
         </a>
         <div id="collapseACL" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login & Permissions:</h6>
+                <h6 class="collapse-header">Role & Permissions:</h6>
                 <a class="collapse-item" href="login.html">Permissions</a>
                 <a class="collapse-item" href="register.html">Roles</a>
                 <a class="collapse-item" href="{{route('user.index')}}">User</a>
