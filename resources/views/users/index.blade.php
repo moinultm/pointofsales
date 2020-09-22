@@ -18,7 +18,46 @@ ACL
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Users List</h6>
                 </div>
+
                 <div class="card-body">
+
+                    <div class="panel-heading mb-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                @if(auth()->user()->can('user.create'))
+                                    <a href="{{route('user.new')}}" class="btn btn-success">
+                                        <i class='fa fa-plus'></i>
+                                        {{ trans('core.add_new_user') }}
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-right">
+                                @if(count(Request::input()))
+
+	            <a class="btn btn-success btn-alt btn-xs" href="{{ action('UserController@getIndex') }}" >
+	            	<i class="fa fa-eraser"></i>
+                    {{ trans('core.clear') }}
+	            </a>
+
+	            <a class="btn btn-success btn-alt btn-xs" id="searchButton" style="color: #ffffff">
+	            	<i class="fa fa-search"></i>
+                    {{ trans('core.modify_search') }}
+	            </a>
+	           @else
+                                    <a class="btn btn-success" id="searchButton" style="color: #ffffff">
+                                        <i class="fa fa-search"></i>
+                                        {{ trans('core.search') }}
+                                    </a>
+                                @endif
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -83,3 +122,4 @@ ACL
             </div>
 
 @endsection
+
