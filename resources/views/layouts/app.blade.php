@@ -39,6 +39,10 @@
 
     @section('js')
     @include('partials.scripts')
+
+        <script>
+
+        </script>
     @show
     </body>
 

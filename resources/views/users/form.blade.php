@@ -5,16 +5,13 @@
 @endsection
 
 @section('content-title')
-    User Edit
+    User
 @endsection
 
 @section('content')
 
    <div class="row">
-       <div class="offset-2 col-xl-8 col-lg-7">
-
-
-
+       <div class="col-xl-8 col-lg-7">
 
     <div class="card shadow mb-4">
 
@@ -29,48 +26,47 @@
         </div>
 
         <div class="card-body">
-
         {!! Form::model($user, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row user', 'id' => 'ism_form']) !!}
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.first_name') }}<span class="required">*</span></label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.first_name') }}<span class="required">*</span></label>
+            <div class="">
                 <input type="text" class="form-control form-control-user" placeholder="First name" name="first_name" value="{{$user->first_name}}" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.last_name') }}<span class="required">*</span></label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.last_name') }}<span class="required">*</span></label>
+            <div class="">
                 <input type="text" class="form-control form-control-user" placeholder="Last name" name="last_name" value="{{$user->last_name}}" />
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.email') }}<span class="required">*</span></label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.email') }}<span class="required">*</span></label>
+            <div class="">
                 <input type="email" class="form-control form-control-user" placeholder="Email" name="email" value="{{$user->email}}"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.password') }}<span class="required">*</span></label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.password') }}<span class="required">*</span></label>
+            <div class="">
                 <input type="password" class="form-control form-control-user" placeholder="Password" name="password"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.confirm_password') }}<span class="required">*</span></label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.confirm_password') }}<span class="required">*</span></label>
+            <div class="">
                 <input type="password" class="form-control form-control-user" placeholder="Retype password" name="password_confirmation"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.role') }}</label>
-            <div class="col-sm-6">
-                <select name="role" class="form-control form-control-user selectpicker" data-live-search="true" title="Please select a role..." @if($user->hasRole("Super User")) disabled="true" @endif>
+            <label class="control-label">{{ trans('core.role') }}</label>
+            <div class="">
+                <select name="role" class="form-control selectpicker" data-live-search="true" title="Please select a role..." @if($user->hasRole("Super User")) disabled="true" @endif>
                     @foreach($roles as $role)
                         <option value="{{$role->id}}" @if($user->hasRole($role->name)) selected @endif>{{$role->name}}</option>
                     @endforeach
@@ -79,9 +75,9 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.warehouse') }}</label>
-            <div class="col-sm-6">
-                <select name="warehouse_id" class="form-control form-control-user selectpicker" data-live-search="true">
+            <label class="control-label">{{ trans('core.warehouse') }}</label>
+            <div class="">
+                <select name="warehouse_id" class="form-control selectpicker" data-live-search="true">
                     @foreach($warehouses as $warehouse)
                         <option value="{{$warehouse->id}}" @if($user->warehouse_id) selected @endif>
                             {{$warehouse->name}}
@@ -92,31 +88,31 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.phone') }}</label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.phone') }}</label>
+            <div class="">
                 <input type="text" class="form-control form-control-user" placeholder="Phone" name="phone" value="{{$user->phone}}"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-3">{{ trans('core.address') }}</label>
-            <div class="col-sm-6">
+            <label class="control-label">{{ trans('core.address') }}</label>
+            <div class="">
                 <textarea class="form-control form-control-user" name="address" rows="1">{{$user->address}}</textarea>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-sm-3 col-sm-offset-3" >
+            <div class="col-sm-3 col-sm-offset-3">
                 @if($user->image)
-                    <img src="{!! asset('uploads/profiles/'.$user->image)!!}" class="img-responsive img-thumbnail" alt="User Image" height="45" width="45" />
+                    <img src="{!! asset('uploads/profiles/'.$user->image)!!}" class="img-responsive img-thumbnail" alt="User Image" height="100" width="100" />
                 @else
-                    <img src="{{asset('img/source-404.jpg')}}" class="img-responsive img-thumbnail" alt="User Image" height="45" width="45" />
+                    <img src="{{asset('img/source-404.jpg')}}" class="img-responsive img-thumbnail" alt="User Image" height="100" width="100" />
                 @endif
             </div>
         </div>
 
-        <div class="row">
-            <label class="col-sm-3 control-label"></label>
+        <div class="row mb-3">
+            <label class="control-label col-sm-3"></label>
             <div class="col-sm-6">
                 {!! Form::file('image') !!}
             </div>
@@ -175,13 +171,7 @@
 @section('js')
     @parent
     <script>
-        $(function() {
-            $('#searchButton').click(function(event) {
-                console.log('action');
-                event.preventDefault();
-                $('#searchModal').modal('show')
-            });
-        })
+
     </script>
 
 @stop
