@@ -6,7 +6,8 @@ use App\User;
 use App\Role;
 use App\Warehouse;
 use Illuminate\Http\Request;
-
+use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
 
@@ -18,10 +19,31 @@ class UserController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $users = User::orderBy('first_name', 'asc')->whereId(auth()->user()->id);
+        if (auth()->user()->can('user.manage')) {
+            $users = User::orderBy('first_name', 'asc');
+            if ($request->get('name')) {
+                $users->where(function($q) use($request) {
+                    $q->where('first_name', 'LIKE', '%' . $request->get('name') . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $request->get('name') . '%');
+                });
+            }
+            if ($request->get('email')) {
+                $users->where(function($q) use($request) {
+                    $q->where('email', 'LIKE', '%' . $request->get('email') . '%');
+                });
+            }
+        }
+        else{
+            $users = User::orderBy('first_name', 'asc')->whereId(auth()->user()->id);
+        }
         return view('users.index')->withUsers($users->paginate(20));
     }
 
+
+    public function postIndex(Request $request) {
+        $params = array_filter($request->only($this->searchParams));
+        return redirect()->action('UserController@getIndex', $params);
+    }
 
 
 
@@ -82,6 +104,7 @@ class UserController extends Controller
         }
 
         $message = trans('core.changes_saved');
+
         return redirect()->route('user.index')->withMessage($message);
 
     }
