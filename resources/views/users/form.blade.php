@@ -11,7 +11,7 @@
 @section('content')
 
    <div class="row">
-       <div class="col-xl-8 col-lg-7">
+       <div class="col-xl-12 col-lg-12">
 
     <div class="card shadow mb-4">
 
@@ -25,7 +25,7 @@
             </h6>
         </div>
 
-        <div class="card-body">
+        <div class="card-body col-xl-8 col-lg-7">
         {!! Form::model($user, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row user', 'id' => 'ism_form']) !!}
 
         <div class="form-group">

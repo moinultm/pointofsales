@@ -127,10 +127,10 @@
         </a>
         <div id="collapseACL" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Role & Permissions:</h6>
-                <a class="collapse-item" href="login.html">Permissions</a>
-                <a class="collapse-item" href="register.html">Roles</a>
-                <a class="collapse-item" href="{{route('user.index')}}">User</a>
+                <h6 class="collapse-header">Roles & Permissions:</h6>
+
+                <a class="collapse-item" href="{{route('role.index')}}"> {{ trans('core.role')}}</a>
+                <a class="collapse-item" href="{{route('user.index')}}">{{ trans('core.user')}}</a>
 
             </div>
         </div>

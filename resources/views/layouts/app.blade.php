@@ -18,6 +18,7 @@
         <!-- Begin Page Content -->
             <div class="container-fluid">
                 @include('partials.contentheader')
+                @include('partials.messages')
 
                     @yield('content')
 

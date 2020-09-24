@@ -7,3 +7,10 @@
 <script src="/sb-admin2/js/sb-admin-2.min.js"></script>
 <!-- Page level plugins -->
 <script src="/sb-admin2/vendor/chart.js/Chart.min.js"></script>
+
+<!--script src="/assets/sweetalert2.min.js"></script-->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

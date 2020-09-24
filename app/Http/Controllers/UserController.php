@@ -151,6 +151,24 @@ class UserController extends Controller
     }
 
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function postStatus (Request $request) {
+        $user = User::findorFail($request->get('user_id'));
+        $status = ($user->inactive == 1) ? 0 : 1;
+
+        $user->inactive = $status;
+        $user->save();
+
+        $message = trans('core.changes_saved');
+        return redirect()->route('user.index')->withSuccess($message);
+
+    }
+
 
 
 }

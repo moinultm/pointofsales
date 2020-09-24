@@ -34,6 +34,16 @@ Route::get('user/{user}/edit', 'UserController@getEditUser')->middleware('permis
 Route::post('user/{user}/edit', 'UserController@postUser')->middleware('permission:user.manage')->name('user.post');
 
 
+/*========================================================
+    Role Permission
+=========================================================*/
+Route::get('role', 'RolePermissionController@getIndex')->name('role.index');
+Route::post('role', 'RolePermissionController@postRole')->name('role.post');
+
+Route::get('role/{role}/permission', 'RolePermissionController@setRolePermissions')->middleware('permission:admins.manage')->name('role.permission');
+Route::post('role/{role}/permission', 'RolePermissionController@postRolePermissions')->middleware('permission:admins.manage')->name('post.role.permission');
+
+
 
 /*
 Route::get('/', function () {

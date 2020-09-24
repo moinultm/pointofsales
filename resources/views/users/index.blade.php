@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-ACL
+    {{trans('core.user')}}
 @endsection
 
 @section('content-title')
- Users
+    {{trans('core.user_list')}}
 @endsection
 
 @section('content')
@@ -68,11 +68,10 @@ ACL
                             <tr>
 
                                 <th>Sl</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email Address</th>
-                                <th>Role</th>
-                                <th>Actions</th>
+                                <th>{{trans('core.name')}}</th>
+                                <th>{{trans('core.email')}}</th>
+                                <th>{{trans('core.role')}}</th>
+                                <th>{{trans('core.actions')}}</th>
                             </tr>
                             </thead>
 
@@ -81,8 +80,8 @@ ACL
                             @foreach($users as $user)
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
-                                    <td class="text-center">{{$user->first_name}}</td>
-                                    <td class="text-center">{{$user->last_name}}</td>
+                                   <td class="text-center">{{$user->first_name}}</td>
+
                                     <td class="text-center">{{$user->email}}</td>
                                     <td class="text-center">
                                         @foreach($user->roles as $role)
@@ -167,6 +166,35 @@ ACL
            </div>
        </div>
        <!-- search modal ends -->
+
+
+       <!-- Activate / Deactivate User -->
+       <div class="modal animated--fade-in" id="userAction{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+               <div class="modal-dialog modal-dialog-centered" role="document">
+                   <div class="modal-content">
+                       <form method="post" action="{{route('user.status')}}">
+                           {{ csrf_field() }}
+                           <input type="hidden" name="user_id" value="{{$user->id}}">
+                       <div class="modal-header">
+                           <h5 class="modal-title">  {{$user->first_name}} {{$user->last_name}} is currently @if($user->inactive == 1) Inactive @else Active @endif</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                           Do you want to @if($user->inactive == 1) Activate  @else Deactivate @endif this user
+                       </div>
+
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                           <button type="submit" class="btn btn-danger">Yes</button>
+                       </div>
+                       </form>
+                   </div>
+               </div>
+       </div>
+
 
 @stop
 

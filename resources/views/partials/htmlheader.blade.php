@@ -8,4 +8,5 @@
     <!-- Custom styles for this template-->
     <link href="/sb-admin2/css/sb-admin-2.css" rel="stylesheet">
     <title>@yield('title')-{{ settings('site_name') }}</title>
+
 </head>
