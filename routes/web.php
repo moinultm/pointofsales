@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', 'HomeController@getIndex')->name('home');
 Route::get('logout','UserController@logout')->name('logout');
 Route::get('lock', 'UserController@lock')->middleware('auth')->name('lock');
