@@ -32,8 +32,8 @@
         @if(isset($message) || Session::has('message'))
 
                 <div class="col-xl-12 col-md-12 mb-4">
-                    <div class="card border-left-danger shadow h-100 py-2">
-                        <div class="card-body text-danger">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body text-info">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-uppercase mb-1">{{ trans('core.info') }}</div>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-times-circle fa-2x text-gray-300"></i>
+                                    <i class="fas fa-check-circle fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>

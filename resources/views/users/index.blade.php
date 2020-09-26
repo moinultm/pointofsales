@@ -169,7 +169,7 @@
 
 
        <!-- Activate / Deactivate User -->
-       <div class="modal animated--fade-in" id="userAction{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal fade" id="userAction{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
                <div class="modal-dialog modal-dialog-centered" role="document">
                    <div class="modal-content">

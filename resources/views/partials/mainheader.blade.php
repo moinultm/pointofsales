@@ -42,6 +42,11 @@
         </div>
     </li>
 
+
+
+
+
+
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,6 +152,13 @@
         </div>
     </li>
 
+    <!-- Nav Lock-->
+    <li class="nav-item  no-arrow mx-1">
+        <a class="nav-link" href="{{ route('lock') }}" >
+            <i class="fas fa-key fa-fw"></i>
+        </a>
+    </li>
+
     <div class="topbar-divider d-none d-sm-block"></div>
 
 @guest
@@ -189,16 +201,11 @@
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
             </a-->
-            <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-               document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            <a href="{{ url('logout') }}" class="dropdown-item">
+                <i class="glyph-icon icon-power-off"></i>
                 {{ trans('core.sign_out') }}
             </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
         </div>
     </li>
       @endguest

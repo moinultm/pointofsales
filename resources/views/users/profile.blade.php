@@ -214,7 +214,7 @@
 
 @section('js')
     @parent
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <script src="/assets/axios.min.js"></script>
     <script>
         var current_password = "{{$user->password}}";
         $('#pasword_change_form').hide();

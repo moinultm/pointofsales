@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'HomeController@getIndex')->name('home');
-
+Route::get('logout','UserController@logout')->name('logout');
+Route::get('lock', 'UserController@lock')->middleware('auth')->name('lock');
+Route::get('locked', 'UserController@locked')->name('locked');
+Route::post('locked', 'UserController@unlock')->name('unlock');
 /*========================================================
     User route
 =========================================================*/

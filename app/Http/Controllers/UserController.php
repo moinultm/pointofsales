@@ -8,6 +8,9 @@ use App\Warehouse;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
+use App\Exceptions\ValidationException;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
 
@@ -166,6 +169,97 @@ class UserController extends Controller
 
         $message = trans('core.changes_saved');
         return redirect()->route('user.index')->withSuccess($message);
+
+    }
+
+
+
+    /**
+     * Lock current user session
+     *
+     */
+    public function lock()
+    {
+        session(['lockedOutUser' => auth()->user()->id]);
+        session(['lockedRoute' => url()->previous()]);
+        \Auth::logout();
+        return redirect()->route('locked');
+    }
+
+
+    /**
+     * Lock current user session
+     *
+     */
+    public function unlock(Request $request)
+    {
+        $intended = session('lockedRoute');
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        if (\Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->intended($intended);
+        }
+        $message = trans('core.wrong_password');
+        return redirect()->back()->withMessage($message);
+    }
+
+    public function locked () {
+        $user = User::find(session('lockedOutUser'));
+        if (!$user) {
+            return redirect()->to('/login');
+        }
+        return view('users.locked')->withUser($user);
+    }
+
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function logout () {
+        \Auth::logout();
+        return redirect()->to('/');
+    }
+
+
+
+
+
+    public function changePassword(Request $request) {
+        $user_id = $request->get('user_id');
+        $user = User::find($user_id);
+        if($request->get('password') == $request->get('confirm_password')){
+            $user->password = $request->get('password');
+            $user->save();
+
+            $message = trans('core.changes_saved');
+            return redirect()->back()->withMessage($message);
+
+        }
+
+        $message = trans('core.oops');
+        return redirect()->back()->withMessage($message);
+
+    }
+
+    public function verifyOldPassword (Request $request) {
+
+        $oldPassword = auth()->user()->password;
+        $password = trim($request->get('password'));
+
+        if (Hash::check($password, $oldPassword)) {
+            return ['value' => true, 'code' => 200];
+        }
+
+        throw new ValidationException('Passwords does not match');
 
     }
 

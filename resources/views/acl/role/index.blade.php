@@ -1,69 +1,83 @@
 @extends('layouts.app')
-
-@section('contentheader')
+@section('title')
 	{{trans('core.role_index')}}
 @stop
-
-@section('breadcrumb')
+@section('content-title')
 	{{trans('core.role_index')}}
 @stop
-
-
 @section('content')
-	
-	<div class="panel-heading">
-		@if(auth()->user()->can('acl.manage'))
-			<a type="button" class="btn btn-success btn-xs " data-toggle="modal" data-target="#myModal">
-			   <i class="fa fa-plus"></i> 
-			   {{trans('core.add_new_role')}}
-			</a>
-		@endif
-	</div>
 
-	<div class="panel-body">
-		<table class="table table-hover table-bordered" >
-			<thead class="table-header-color">
-				<td class="text-center">{{trans('core.role')}}</td>
-				<td class="text-center">{{trans('core.actions')}}</td>
-			</thead>
 
-			<tbody>
-				@foreach($roles as $role)
-					<tr>
-						<td class="text-center">{{$role->name}}</td>
-						<td class="text-center">
-							<!-- <a href="#" class="btn btn-primary btn-xs">
+
+	<div class="row">
+		<div class="col-xl-12 col-lg-12">
+
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					@if(auth()->user()->can('acl.manage'))
+						<a type="button" class="font-weight-bold text-primary" data-toggle="modal" data-target="#myModal">
+							<i class="fa fa-plus"></i>
+							{{trans('core.add_new_role')}}
+						</a>
+					@endif
+
+				</div>
+
+				<div class="card-body">
+
+					<table class="table table-hover table-bordered" >
+						<thead class="table-header-color">
+						<td class="text-center">{{trans('core.role')}}</td>
+						<td class="text-center">{{trans('core.actions')}}</td>
+						</thead>
+
+						<tbody>
+						@foreach($roles as $role)
+							<tr>
+								<td class="text-center">{{$role->name}}</td>
+								<td class="text-center">
+								<!-- <a href="#" class="btn btn-primary btn-xs">
 								<i class="fa fa-edit"></i>
 								{{trans('core.edit')}}
-							</a> -->
+										</a> -->
 
-							<!-- Set permission for role -->
-							@if(auth()->user()->can('acl.set'))
-								<a href="{{route('role.permission', $role->id)}}" class="btn btn-info btn-xs">
-									<i class="fa fa-user-secret"></i>
-									{{trans('core.set_permission')}}
-								</a>
-							@endif
-							<!-- ends -->
+									<!-- Set permission for role -->
+									@if(auth()->user()->can('acl.set'))
+										<a href="{{route('role.permission', $role->id)}}" class="btn btn-info btn-xs">
+											<i class="fa fa-user-secret"></i>
+											{{trans('core.set_permission')}}
+										</a>
+								@endif
+								<!-- ends -->
 
-						</td>
-					</tr>
-					<!-- Modal for delete role-->
-				@endforeach
-			</tbody>
-		</table>
-		<!-- Table Ends -->
+								</td>
+							</tr>
+							<!-- Modal for delete role-->
+						@endforeach
+						</tbody>
+					</table>
+					<!-- Table Ends -->
+
+
+				</div>
+			</div>
+		</div>
 	</div>
+
+
 	<!-- Modal for create role-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	{!! Form::open(['method' => 'post', 'class' => 'form-horizontal']) !!}
-	  <div class="modal-dialog" role="document">
+
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+		  {!! Form::open(['method' => 'post', 'class' => 'form-horizontal']) !!}
+
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">
-	        	{{trans('core.add_new_role')}}
-	        </h4>
+
+			  <h5 class="modal-title">  {{trans('core.add_new_role')}}</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+			  </button>
 	      </div>
 	      <div class="modal-body">
 	        <div class="form-group">
@@ -76,7 +90,7 @@
             </div>
 	      </div>
 	      <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
             	{{trans('core.close')}}
             </button>
             {!! Form::submit('Save', ['class' => 'btn btn-primary', 'data-disable-with' => 'Saving']) !!}

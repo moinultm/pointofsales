@@ -11,6 +11,5 @@
 <!--script src="/assets/sweetalert2.min.js"></script-->
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
