@@ -11,11 +11,10 @@
 @section('content')
 
        <!-- Page Heading -->
-             <p class="mb-4">  </p>
+    <p class="mb-4"> </p>
 
        <div class="row">
            <div class="col-md-12">
-
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">

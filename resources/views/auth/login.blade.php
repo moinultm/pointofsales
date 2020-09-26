@@ -19,10 +19,7 @@
 <!--App-->
 <div id="app">
 
-
-
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -93,7 +90,7 @@
 
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="#">{{ __('Account Request!') }}</a>
+                                        <a class="small" href="{{ route('register') }}">{{ __('Account Request!') }}</a>
                                     </div>
                                 </div>
                             </div>
