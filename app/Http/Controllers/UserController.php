@@ -39,7 +39,7 @@ class UserController extends Controller
         else{
             $users = User::orderBy('first_name', 'asc')->whereId(auth()->user()->id);
         }
-        return view('users.index')->withUsers($users->paginate(20));
+        return view('users.index')->withUsers($users->paginate(10));
     }
 
 

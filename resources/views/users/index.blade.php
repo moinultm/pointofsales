@@ -35,6 +35,7 @@
                                 @endif
                             </div>
                             <div class="col-sm-12 col-md-6 text-right">
+
                                 @if(count(Request::input()))
 
 	            <a class="btn btn-success btn-alt btn-xs" href="{{ action('UserController@getIndex') }}" >
@@ -79,7 +80,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
-                                   <td class="text-center">{{$user->first_name}}</td>
+                                   <td class="text-center">{{$user->name}}</td>
 
                                     <td class="text-center">{{$user->email}}</td>
                                     <td class="text-center">
@@ -95,15 +96,15 @@
                                             </a>
 
                                             <a type="button" data-toggle="modal" data-target="#userAction{{$user->id}}">
-                                                @if($user->inactive == 1)
-                                                    <span class="btn btn-success btn-alt btn-xs">
-											{{trans('core.activate')}}
-										</span>
-                                                @else
-                                                    <span class="btn btn-danger btn-alt btn-xs">
-											{{trans('core.deactivate')}}
-										</span>
-                                                @endif
+                                                                @if($user->inactive == 1)
+                                                                    <span class="btn btn-success btn-alt btn-xs">
+                                                            {{trans('core.activate')}}
+                                                        </span>
+                                                                @else
+                                                                    <span class="btn btn-danger btn-alt btn-xs">
+                                                            {{trans('core.deactivate')}}
+                                                        </span>
+                                                 @endif
                                             </a>
                                         @else
                                             <a href="#" class="btn btn-border btn-alt border-blue btn-link font-blue btn-xs" disabled>
@@ -115,11 +116,61 @@
 
 
                                 </tr>
+
+
+
+                                <!-- Activate / Deactivate User -->
+                                <div class="modal fade" id="userAction{{$user->id}}" >
+
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" action="{{route('user.status')}}">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="user_id" value="{{$user->id}}">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">  {{$user->first_name}} {{$user->last_name}} is currently @if($user->inactive == 1) Inactive @else Active @endif</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you want to @if($user->inactive == 1) Activate  @else Deactivate @endif this user
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             @endforeach
 
                             </tbody>
+
+
                         </table>
+
+
+
                     </div>
+
+                    <div class="row  mt-2">
+                        <div class="col-sm-12 col-md-5">
+
+                          Total Records:  {{$users->total()}}
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="float-right">  {{ $users->links() }}</div>
+
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -167,32 +218,6 @@
        <!-- search modal ends -->
 
 
-       <!-- Activate / Deactivate User -->
-       <div class="modal fade" id="userAction{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-
-               <div class="modal-dialog modal-dialog-centered" role="document">
-                   <div class="modal-content">
-                       <form method="post" action="{{route('user.status')}}">
-                           {{ csrf_field() }}
-                           <input type="hidden" name="user_id" value="{{$user->id}}">
-                       <div class="modal-header">
-                           <h5 class="modal-title">  {{$user->first_name}} {{$user->last_name}} is currently @if($user->inactive == 1) Inactive @else Active @endif</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                       </div>
-                       <div class="modal-body">
-                           Do you want to @if($user->inactive == 1) Activate  @else Deactivate @endif this user
-                       </div>
-
-                       <div class="modal-footer">
-                           <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
-                           <button type="submit" class="btn btn-danger">Yes</button>
-                       </div>
-                       </form>
-                   </div>
-               </div>
-       </div>
 
 
 @stop

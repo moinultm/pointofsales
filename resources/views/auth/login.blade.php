@@ -11,7 +11,7 @@
 <link href="/sb-admin2/css/sb-admin-2.css" rel="stylesheet">
 
 <title>
-    Login :: {{settings('site_name')}}
+    Login - {{settings('site_name')}}
 </title>
 
 

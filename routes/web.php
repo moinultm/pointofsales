@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@getIndex')->name('home');
+
+
+Route::get('/home', 'HomeController@getIndex')->middleware(['auth', 'revalidate','verified'])->name('home');
+Route::get('/', 'HomeController@getIndex')->middleware(['auth', 'revalidate','verified'])->name('home');
 Route::get('logout','UserController@logout')->name('logout');
 Route::get('lock', 'UserController@lock')->middleware('auth')->name('lock');
 Route::get('locked', 'UserController@locked')->name('locked');
@@ -41,11 +44,19 @@ Route::post('user/{user}/edit', 'UserController@postUser')->middleware('permissi
 /*========================================================
     Role Permission
 =========================================================*/
-Route::get('role', 'RolePermissionController@getIndex')->name('role.index');
+Route::get('role', 'RolePermissionController@getIndex')->middleware('permission:admins.manage')->name('role.index');
 Route::post('role', 'RolePermissionController@postRole')->name('role.post');
 
 Route::get('role/{role}/permission', 'RolePermissionController@setRolePermissions')->middleware('permission:admins.manage')->name('role.permission');
 Route::post('role/{role}/permission', 'RolePermissionController@postRolePermissions')->middleware('permission:admins.manage')->name('post.role.permission');
+
+
+
+/*========================================================
+    Email Settings
+=========================================================*/
+
+Route::get('email/settings', 'EmailSettingsController@getIndex')->name('email.index');
 
 
 
@@ -55,5 +66,10 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+//https://stackoverflow.com/questions/45146260/dynamic-mail-configuration-with-values-from-database-laravel
+//https://stackoverflow.com/questions/37585776/how-to-implement-theming-in-laravel-5
+//https://stackoverflow.com/questions/16577158/laravel-theme-for-managing-layouts

@@ -25,6 +25,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function index()
+    {
+        return view('home');
+    }
+
+
+
 }
 
 //Require to implement this LOG Activity

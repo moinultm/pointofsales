@@ -10,7 +10,6 @@
 
 @section('content')
 
-
                     <div class="row">
 
                         <div class="col-md-3">
@@ -66,6 +65,11 @@
 
 
                                             <form class="user">
+
+                                                <div class="form-group">
+                                                    <label>{{ trans('core.name') }}</label>
+                                                    <input   class="form-control form-control-user"    placeholder=" {{$user->name}}" disabled>
+                                                </div>
 
                                                 <div class="form-group">
                                                     <label>{{ trans('core.email') }}</label>
