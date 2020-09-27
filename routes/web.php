@@ -53,10 +53,20 @@ Route::post('role/{role}/permission', 'RolePermissionController@postRolePermissi
 
 
 /*========================================================
+		Settings route
+	=========================================================*/
+Route::model('setting', 'App\Setting');
+Route::get('settings', 'SettingsController@getIndex')->name('settings.index');
+Route::post('settings', 'SettingsController@postIndex')->middleware('permission:settings.manage')->name('settings.post');
+Route::get('settings/backup', 'SettingsController@getBackup')->middleware('permission:admins.manage')->name('settings.backup');
+
+/*========================================================
     Email Settings
 =========================================================*/
 
 Route::get('email/settings', 'EmailSettingsController@getIndex')->name('email.index');
+Route::get('email/settings', 'EmailSettingsController@getIndex')->name('email.index');
+Route::post('email/settings', 'EmailSettingsController@postIndex')->middleware('permission:settings.manage')->name('mail.post');
 
 
 
