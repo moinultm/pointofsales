@@ -70,6 +70,16 @@ Route::post('email/settings', 'EmailSettingsController@postIndex')->middleware('
 
 
 
+/*========================================================
+    Tax Rates
+=========================================================*/
+Route::get('vat', 'TaxController@getIndex')->name('tax.index');
+Route::post('vat', 'TaxController@postTax')->name('tax.post');
+Route::post('vat/delete','TaxController@deleteTax')->name('tax.delete');
+Route::post('vat/edit', 'TaxController@editTax')->name('tax.edit');
+
+
+
 /*
 Route::get('/', function () {
     return view('welcome');
@@ -79,7 +89,7 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 
 
-
+//https://github.com/InfinetyEs/Nova-Menu-Builder/tree/master/src
 //https://stackoverflow.com/questions/45146260/dynamic-mail-configuration-with-values-from-database-laravel
 //https://stackoverflow.com/questions/37585776/how-to-implement-theming-in-laravel-5
 //https://stackoverflow.com/questions/16577158/laravel-theme-for-managing-layouts

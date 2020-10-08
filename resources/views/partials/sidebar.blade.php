@@ -112,7 +112,7 @@
         <div id="collapseSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Site info:</h6>
-                <a class="collapse-item" href="#">Site Settings</a>
+                <a class="collapse-item" href="{{route('settings.index')}}">Main Settings</a>
                 <a class="collapse-item" href="login.html">Backup</a>
                 <a class="collapse-item" href="login.html">Branches</a>
                 <a class="collapse-item" href="{{route('email.index')}}">Email Server</a>
@@ -147,3 +147,5 @@
 
 </ul>
 <!-- End of Sidebar -->
+
+

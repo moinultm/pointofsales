@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Settings;
+use App\Setting;
+use App\Tax;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -10,12 +11,26 @@ class SettingsController extends Controller
     public function getIndex()
     {
 
-        $setting = Settings::whereId(1)->first();
-        if(!$setting){
-            $setting = new Settings;
+        $setting = Setting::whereId(1)->first();
+        $taxes = Tax::all();
+
+        if($setting) {
+            $tax_rate = $setting->invoice_tax_rate;
+        }else{
+            $tax_rate = 0;
         }
+
+        if(!$setting){
+            $setting = new Setting;
+        }
+
+        /*$path = base_path().'/resources/lang';
+        $directories = array_map('basename', File::directories($path));*/
+
         return view('settings.index')
-            ->with('setting',$setting);
+            ->with('setting',$setting)
+            ->with('taxes', $taxes)
+            ->with('tax_rate', $tax_rate);
 
     }
 
