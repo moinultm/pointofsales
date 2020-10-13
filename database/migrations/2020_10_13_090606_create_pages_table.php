@@ -18,15 +18,15 @@ class CreatePagesTable extends Migration
             $table->string('title');
             $table->string('page_slug');
             $table->longText('description');
-            $table->string('image');
-            `video_url` varchar(100) DEFAULT NULL,
-  `publishar_id` int(11) DEFAULT NULL,
-  `seo_keyword` text,
-  `seo_description` text,
-  `publish_date` datetime DEFAULT NULL,
-  `reader_view` int(11) DEFAULT NULL,
-  `releted_id` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1'
+            $table->string('image')->nullable();
+            $table->text('video_url')->nullable();
+            $table->text('publisher_id')->nullable();
+            $table->text('seo_keyword')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->text('publish_date')->nullable();
+            $table->text('reader_view')->nullable();
+            $table->text('related_id')->nullable();
+            $table->text('status')->default(1);
             $table->timestamps();
         });
     }
