@@ -14,10 +14,19 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('parent_id')->default('0');
             $table->timestamps();
         });
+
+        Schema::create('category_news_post', function(Blueprint $table) {
+            $table->integer('news_post_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+        });
     }
+
+
 
     /**
      * Reverse the migrations.
@@ -26,6 +35,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::drop('categories');
+        Schema::drop('category_news_post');
     }
 }

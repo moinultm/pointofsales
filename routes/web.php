@@ -117,3 +117,4 @@ Auth::routes(['verify' => true]);
 //https://stackoverflow.com/questions/45146260/dynamic-mail-configuration-with-values-from-database-laravel
 //https://stackoverflow.com/questions/37585776/how-to-implement-theming-in-laravel-5
 //https://stackoverflow.com/questions/16577158/laravel-theme-for-managing-layouts
+//
