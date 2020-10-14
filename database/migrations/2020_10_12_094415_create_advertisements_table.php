@@ -15,6 +15,12 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
+            $table->string('position');
+            $table->string('image');
+            $table->string('hyperlink')->nullable();
+            $table->text('custom_code')->nullable();
+            $table->integer('mobile_status')->default(1);
+            $table->integer('large_status')->default(1);
             $table->timestamps();
         });
     }

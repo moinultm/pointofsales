@@ -17,13 +17,14 @@ class CreateNewsPostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('title');
-            $table->string('sub_title');
+            $table->string('title_color')->nullable();
+            $table->string('sub_title')->nullable();
             $table->text('content');
             $table->string('image');
-            $table->string('img_caption');
-            $table->string('video_url');
-            $table->string('video_caption');
-            $table->string('reporter_name');
+            $table->string('img_caption')->nullable();
+            $table->string('video_url')->nullable();
+            $table->string('video_caption')->nullable();
+            $table->string('reporter_name')->nullable()->nullable();
             $table->integer('is_latest')->default(0);
             $table->string('post_by')->nullable();
             $table->string('update_by')->nullable();
@@ -41,7 +42,6 @@ class CreateNewsPostsTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('news_posts');
+    {        Schema::dropIfExists('news_posts');
     }
 }
