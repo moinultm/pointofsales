@@ -77,7 +77,7 @@
         <div id="collapseFeatures" class="collapse" aria-labelledby="headingFeatures" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="404.html">Articles</a>
+                <a class="collapse-item" href="{{route('news.index')}}">Articles</a>
                 <a class="collapse-item" href="404.html">Photo Gallery </a>
                 <a class="collapse-item" href="404.html">Advertisements</a>
                 <a class="collapse-item" href="404.html">Category</a>

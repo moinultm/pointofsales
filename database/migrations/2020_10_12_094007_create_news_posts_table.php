@@ -29,8 +29,7 @@ class CreateNewsPostsTable extends Migration
             $table->string('post_by')->nullable();
             $table->string('update_by')->nullable();
             $table->integer('view_count')->default(0);
-            $table->timestamp('published_at')->index();
-            $table->timestamp('updated_at')->index();
+
             $table->timestamps();
             $table->softDeletes();
         });

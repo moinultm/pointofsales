@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::get('/home', 'HomeController@getIndex')->middleware(['auth', 'revalidate','verified'])->name('home');
 Route::get('/', 'HomeController@getIndex')->middleware(['auth', 'revalidate','verified'])->name('home');
 Route::get('logout','UserController@logout')->name('logout');
 Route::get('lock', 'UserController@lock')->middleware('auth')->name('lock');
 Route::get('locked', 'UserController@locked')->name('locked');
 Route::post('locked', 'UserController@unlock')->name('unlock');
+
 /*========================================================
     User route
 =========================================================*/
@@ -71,7 +70,6 @@ Route::get('email/settings', 'EmailSettingsController@getIndex')->name('email.in
 Route::post('email/settings', 'EmailSettingsController@postIndex')->middleware('permission:settings.manage')->name('mail.post');
 
 
-
 /*========================================================
     Tax Rates
 =========================================================*/
@@ -85,6 +83,20 @@ Route::post('vat/edit', 'TaxController@editTax')->name('tax.edit');
 /*========================================================
     Article Post
 =========================================================*/
+
+Route::model('news', 'App\NewsPost');
+Route::get('news', 'NewsPostController@getIndex')->name('news.index');
+Route::post('news', 'NewsPostController@postIndex');
+
+Route::get('user/new', 'NewsPostController@getNewUser')->middleware('permission:news.create')->name('news.new');
+Route::post('user/new', 'NewsPostController@postUser')->middleware('permission:news.create')->name('news.post');
+
+
+Route::post('user/status', 'NewsPostController@postStatus')->middleware('permission:user.manage')->name('user.status');
+
+Route::get('user/{user}/edit', 'NewsPostController@getEditNews')->middleware('permission:user.manage')->name('user.edit');
+Route::post('user/{user}/edit', 'NewsPostController@postNews')->middleware('permission:user.manage')->name('user.post');
+
 
 
 /*========================================================

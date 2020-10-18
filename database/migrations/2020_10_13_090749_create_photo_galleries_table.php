@@ -22,14 +22,13 @@ class CreatePhotoGalleriesTable extends Migration
            $table->timestamps();
         });
 
-        Schema::create('photo', function (Blueprint $table) {
+        Schema::create('gallery_photo', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('gallery_id')->unsigned();
             $table->string('title');
             $table->string('photo');
             $table->timestamps();
-            $table->foreign('gallery_id')->references('id')->on('photo_galleries')
-             ->onDelete('cascade');
+
         });
     }
 

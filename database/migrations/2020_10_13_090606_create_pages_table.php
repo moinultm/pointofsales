@@ -26,7 +26,7 @@ class CreatePagesTable extends Migration
             $table->text('publish_date')->nullable();
             $table->text('reader_view')->nullable();
             $table->text('related_id')->nullable();
-            $table->text('status')->default(1);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
