@@ -32,6 +32,12 @@ class NewsPostController extends Controller
         return view('news.index')->withUsers($users->paginate(10));
     }
 
+    public function postIndex(Request $request)
+    {
+        $params = array_filter($request->only($this->searchParams));
+        return redirect()->action('NewsPostController@getIndex', $params);
+    }
+
 
     public function getNewsPost(Request $request)
     {
@@ -42,4 +48,6 @@ class NewsPostController extends Controller
 
     }
 
+
+    
 }

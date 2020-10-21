@@ -88,20 +88,19 @@ Route::model('news', 'App\NewsPost');
 Route::get('news', 'NewsPostController@getIndex')->name('news.index');
 Route::post('news', 'NewsPostController@postIndex');
 
-Route::get('user/new', 'NewsPostController@getNewsPost')->middleware('permission:user.create')->name('news.new');
-Route::post('user/new', 'NewsPostController@postNewsPost')->middleware('permission:user.create')->name('news.post');
+Route::get('news/new', 'NewsPostController@getNewsPost')->middleware('permission:user.create')->name('news.new');
+Route::post('news/new', 'NewsPostController@postNewsPost')->middleware('permission:user.create')->name('news.post');
 
-
-Route::post('user/status', 'NewsPostController@postStatus')->middleware('permission:user.manage')->name('user.status');
-
-Route::get('user/{user}/edit', 'NewsPostController@getEditNews')->middleware('permission:user.manage')->name('user.edit');
-Route::post('user/{user}/edit', 'NewsPostController@postNews')->middleware('permission:user.manage')->name('user.post');
+Route::post('news/status', 'NewsPostController@postNewsStatus')->middleware('permission:user.manage')->name('news.status');
+Route::get('news/{news}/edit', 'NewsPostController@getEditNews')->middleware('permission:user.manage')->name('news.edit');
+Route::post('news/{news}/edit', 'NewsPostController@postNews')->middleware('permission:user.manage')->name('news.post');
 
 
 
 /*========================================================
     Categories Post
 =========================================================*/
+
 
 
 /*========================================================
