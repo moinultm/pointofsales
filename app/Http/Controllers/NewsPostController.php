@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\NewsPost;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,16 @@ class NewsPostController extends Controller
 
         }
         return view('news.index')->withUsers($users->paginate(10));
+    }
+
+
+    public function getNewsPost(Request $request)
+    {
+        $news = new NewsPost();
+        $categories = Category::all();
+
+        return view('news.form',compact('news','categories'));
+
     }
 
 }
