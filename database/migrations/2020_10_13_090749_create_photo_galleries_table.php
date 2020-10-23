@@ -17,7 +17,7 @@ class CreatePhotoGalleriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('cover_photo');
-           $table->string('category');
+           $table->string('categories');
            $table->integer('status')->unsigned();
            $table->timestamps();
         });

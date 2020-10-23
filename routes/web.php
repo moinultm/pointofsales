@@ -97,17 +97,25 @@ Route::post('news/{news}/edit', 'NewsPostController@postNews')->middleware('perm
 
 
 
-/*========================================================
-    Categories Post
-=========================================================*/
 
+/*========================================================
+    Category Routes
+=========================================================*/
+Route::model('category', 'App\Category');
+Route::get('category', 'CategoryController@getIndex')->name('category.index');
+Route::post('category', 'CategoryController@postIndex');
+
+Route::get('category/new', 'CategoryController@getNewCategory')->middleware('permission:category.create')->name('category.new');
+Route::post('category/new', 'CategoryController@postCategory')->middleware('permission:category.create')->name('category.post');
+
+Route::get('category/{category}', 'CategoryController@getEditCategory')->middleware('permission:category.manage')->name('category.edit');
+Route::post('category/{category}', 'CategoryController@postCategory')->middleware('permission:category.manage')->name('category.post');
+Route::delete('category/delete/{category}', 'CategoryController@deleteCategory')->middleware('permission:category.manage')->name('category.delete');
 
 
 /*========================================================
     Area Post
 =========================================================*/
-
-
 
 /*========================================================
    Menu
@@ -128,4 +136,8 @@ Auth::routes(['verify' => true]);
 //https://stackoverflow.com/questions/45146260/dynamic-mail-configuration-with-values-from-database-laravel
 //https://stackoverflow.com/questions/37585776/how-to-implement-theming-in-laravel-5
 //https://stackoverflow.com/questions/16577158/laravel-theme-for-managing-layouts
-//
+//https://adminlte.io/blog/integrate-adminlte-with-laravel
+
+
+//bower install adminlte#v2.4.15
+

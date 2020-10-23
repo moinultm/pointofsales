@@ -6,7 +6,7 @@ return [
     'wrong_password' => 'Wrong password. Please try again.',
     'subcategory_deleted' => 'Subcategory deleted successfully.',
     'subcategory_has_products' => 'The subcategory you are trying to remove has existing products. Please remove existing products and try again.',
-    'category_has_subcategories' => 'The category you are trying to remove has existing subcategories & products. Please remove existing subcategories & products and try again.',
+    'category_has_subcategories' => 'The categories you are trying to remove has existing subcategories & products. Please remove existing subcategories & products and try again.',
     'client_has_transactions' => 'This client cannot be deleted. Reason: Client has existing transactions.',
     'warehouse_has_transactions' => 'This warehouse cannot be deleted. Reason: warehouse has existing transactions.',
     'owner_has_sells' => 'This owner cannot be deleted. Reason: owner has existing Sales.',
@@ -46,7 +46,7 @@ return [
     'bill_info' => 'Bill Info',
     'bill_list' => 'Bill List',
 
-    'category' => 'Category',
+    'categories' => 'Category',
     'cancel' => 'Cancel',
     'category_index' => 'Category Index',
     'cash' => 'Cash',

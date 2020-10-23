@@ -3,48 +3,102 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private $searchParams = ['name'];
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getIndex(Request $request)
+    {
+        $categories = Category::orderBy('name', 'asc');
 
-    public function  getIndex(){
-        $categories= ['0'=>'Primary']+ Category::lists('name','id')->all();
+        if($request->get('name')) {
+            $categories->where(function($q) use($request) {
+                $q->where('name', 'LIKE', '%' . $request->get('name') . '%');
+            });
+        }
 
-        return view('category.index',compact('categories'));
+        return view('categories.index')->withCategories($categories->paginate(20));
     }
 
-    public function  create(){
-        $categories= ['0'=>'Primary']+ Category::lists('name','id')->all();
-
-        return view('category.create',compact('categories'));
-    }
-
-    public function  store(Request $request) {
-        $NewCategory= new Category();
-        $NewCategory->name=$request->input("name");
-        $NewCategory->parent_id=$request->input("category_check");
-        $NewCategory->save();
-        //dd($request->input("category_check"));
-        return redirect('category.create');
-    }
-
-    public function  edit($id) {
-        $categories= ['0'=>'Primary']+ Category::lists('name','id')->all();
-
-        $NewsCategory=  Category::FindOrFail($id);
-        //$categories=  Category::all();
-        return view('category.edit',compact('NewsCategory','categories'));
+    /**
+     * post method of index.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postIndex(Request $request) {
+        $params = array_filter($request->only($this->searchParams));
+        return redirect()->action('CategoryController@getIndex', $params);
     }
 
 
-    public function  update($id,Request $request) {
-        $categories=  Category::lists('name','id');
-        $NewCategory=Category::FindOrFail($id);
-        $NewCategory->name=$request->input("name");
-        $NewCategory->parent_id=$request->input("category_check");
-        $NewCategory->update();
-        return view('category.create',compact('categories'));
+    public function getNewCategory()
+    {
+        $category = new Category;
+        $subcategory=  Category::pluck('name', 'id');
+        return view('categories.form')->withCategory($category)
+            ->withSubcategory($subcategory);
+    }
+
+
+    public function postCategory(CategoryRequest $request, Category $category)
+    {
+        $category->name = $request->get('name');
+        $category->parent_id = $request->get('parent_id')|| 0;
+        $category->save();
+
+        $message = trans('core.changes_saved');
+        return redirect()->route('category.form')->withSuccess($message);
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getEditCategory(Category $category)
+    {
+        return view('categories.form')->withCategory($category);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCategory(Category $category)
+    {
+        if(count($category->subcategories) ==  0 && count($category->product) == 0){
+            $category->delete();
+            $success = trans('core.deleted');
+            return redirect()->back()->withSuccess($success);
+        }else{
+            $warning = trans('core.category_has_subcategories');
+            return redirect()->back()->withWarning($warning);
+        }
+    }
+
+
+    /**
+     * Load Subcategory of a categories
+     *
+     * @param  int  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function ajaxRequest(Request $request)
+    {
+        $category_id = $request->get('categoryID');
+        $subcategory = Subcategory::where('category_id', $category_id)->get();
+        return view('categories.subcategory', compact('subcategory'));
     }
 
 }

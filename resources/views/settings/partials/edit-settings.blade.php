@@ -1,3 +1,6 @@
+
+
+
 {!! Form::model($setting, ['method' => 'post', 'files' => true]) !!}
 <div class="example-box-wrapper">
     <div class="form-horizontal bordered-row">

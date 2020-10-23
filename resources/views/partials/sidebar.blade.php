@@ -80,7 +80,7 @@
                 <a class="collapse-item" href="{{route('news.index')}}">Articles</a>
                 <a class="collapse-item" href="404.html">Photo Gallery </a>
                 <a class="collapse-item" href="404.html">Advertisements</a>
-                <a class="collapse-item" href="404.html">Category</a>
+                <a class="collapse-item" href="{{route('category.index')}}">Category</a>
                 <a class="collapse-item" href="404.html">Area</a>
 
             </div>

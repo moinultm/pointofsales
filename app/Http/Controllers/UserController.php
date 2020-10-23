@@ -77,6 +77,8 @@ class UserController extends Controller
      */
     public function postUser(UserRequest $request, User $user)
     {
+
+
         $exists = $user->exists();
 
         $user->first_name = $request->get('first_name');

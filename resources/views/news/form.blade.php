@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-title')
-    News
+    News Post
 @endsection
 
 @section('content')
@@ -17,131 +17,153 @@
 
         <div class="card-header">
             <h6 class="m-0 font-weight-bold text-primary">
-
+                @if($news->id)
+                    {{trans('core.editing')}}: {{$news->title}}
+                @else
+                    {{trans('core.add_new_news')}}
+                @endif
             </h6>
         </div>
 
-        <div class="card-body col-xl-8 col-lg-7">
-        {!! Form::model($news, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row ', 'id' => 'ism_form']) !!}
+        <div class="card-body col-xl-12 col-lg-12">
+<!--
 
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        {!! Form::label('SubTitle',"Sub Title:") !!}
-                        {!! Form::text('sub_title',null,['class'=>'form-control']) !!}
-                    </div>
+-->
 
-                    <div class="form-group">
-                        {!! Form::label('Title',"Title:") !!}
-                        {!! Form::text('title',null,['class'=>'form-control']) !!}
-                    </div>
+            {!! Form::model($news, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row ', 'id' => 'ism_form']) !!}
 
-                    <div class="form-group">
-                        {!! Form::label('ReporterName',"Reporter Name:") !!}
-                        {!! Form::text('reporter_name',null,['class'=>'form-control']) !!}
-                    </div>
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="form-group">
-                        {!! Form::label('Content',"Content:") !!}
-                        {!! Form::textarea('content',null,['class'=>'form-control tinymce']) !!}
-                    </div>
-
-                    {{--  <div class="form-group">
-                             {!! Form::label('Image') !!}
-                             {!! Form::file('img_url', null) !!}
-                      </div>--}}
-
-                    <div class="input-group">
-                     <span class="input-group-btn">
-                       <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                         <i class="fa fa-picture-o"></i> Choose
-                       </a>
-                     </span>
-                        <input id="thumbnail" class="form-control" type="text" name="img_url" value={{ $img_url }}>
-                    </div>
-                    <img id="holder" style="margin-top:15px;max-height:100px;">
-
-
-                    <div class="form-group">
-                        {!! Form::label('ImageCaption',"Image Caption:") !!}
-                        {!! Form::text('img_caption',null,['class'=>'form-control']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('Video',"Video:") !!}
-                        {!! Form::text('video_url',null,['class'=>'form-control']) !!}
-                    </div>
-
-
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        {!! Form::label('published_at',"Publish Date:") !!}
-                        {!! Form::input('datetime-local','published_at' ,$timeToday,['class'=>'form-control date-picker']) !!}
-                    </div>
-
-                    <div class="form-group tm-admin-Category">
-                        <h3>Categories </h3>
-
-                        @foreach($allSubCategories as $subCate)
-                            {{--Parent Category<br>--}}
-                            {{ Form::radio('category_check[]', $subCate->id,$subCate->id == $selectedParents ? 1:0  ) }}
-                            {{ Form::label('category_name', $subCate->name) }}
-                            <br>
-                            @foreach($subCate->subCategory as $firstNestedSub)
-                                {{--First Nested<br>--}}
-                                <div  style="margin-left: 20px;">
-                                    {{ Form::radio('category_check[]', $firstNestedSub->id, $firstNestedSub->id  ==  $selectedParents ? 1:0   ) }}
-                                    {{ Form::label('category_name', $firstNestedSub->name) }}
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.title') }}<span class="required">*</span></label>
+                                    <div class="">
+                                        <input type="text" class="form-control form-control-user" placeholder="Title" name="title" value="{{$news->title}}" />
+                                    </div>
                                 </div>
 
-                                @foreach($firstNestedSub->subCategory as $secondNestedSub)
-                                    {{--Second Nested<br>--}}
-                                    <div  style="margin-left: 40px;">
-                                        {{ Form::radio('category_check[]',$secondNestedSub->id , $secondNestedSub->id  ==  $selectedParents ? 1:0   ) }}
-                                        {{ Form::label('category_name',$secondNestedSub->name) }}
+
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.sub_title') }}<span class="required">*</span></label>
+                                    <div class="">
+                                        <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="sub_title" value="{{$news->sub_title}}" />
                                     </div>
-                                    @foreach($secondNestedSub->subCategory as $thirdNestedSub)
-                                        {{-- $thirdNested: $thirdNestedSub->name --}}
-                                        <div  style="margin-left: 60px;">
-                                            {{ Form::radio('category_check[]',$thirdNestedSub->id, $thirdNestedSub->id  ==  $selectedParents ? 1:0  ) }}
-                                            {{ Form::label('category_name',$thirdNestedSub->name) }}
-                                        </div>
+                                </div>
 
-                                    @endforeach()
-                                @endforeach()
-                            @endforeach()
-                        @endforeach()
 
-                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">{{ trans('core.content') }}</label>
+                                        <textarea class="form-control form-control-user" name="address">{{$news->content}}</textarea>
+                                    </div>
 
-                    <div class="form-group">
-                        {!! Form::label('location',"Division:") !!}
-                        {!! Form::select('main_area',$areas,$selectedMainArea,['class'=>'form-control','id'=>'area']) !!}
-                    </div>
 
-                    <div class="form-group">
-                        {!! Form::label('subLocation',"District:") !!}
-                        {!! Form::select('sub_area',$subsAreas,$selectedSubArea,['class'=>'form-control','id'=>'sub_area']) !!}
-                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('video_caption') }}</label>
+                                    <input type="text"class="form-control form-control-user" value="{{$news->video_caption}}"/>
+                                </div>
 
-                    <div class="form-group">
-                        {!! Form::label('section',"Section:") !!}
-                        {!! Form::select('section_check',$sections,$selectedSection,['class'=>'form-control','id'=>'section']) !!}
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.video_url') }}</label>
+                                    <input type="text" class="form-control form-control-user" value="{{$news->video_url}}"/>
+                                </div>
+
+                            </div><!--col9-->
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.is_latest') }}<span class="required">*</span></label>
+                                    <div class="">
+                                        <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="sub_title" value="{{$news->sub_title}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.title_color') }}<span class="required">*</span></label>
+                                    <div class="">
+                                        <select name="title_color" class="form-control selectcolor" data-live-search="true">
+                                            <option value="color:green" style="color:green;" @if($news->title_color) selected @endif>Green
+                                            </option>
+                                            <option value="color:red" style="color:red;" @if($news->title_color) selected @endif>RED
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.reporter_name') }}<span class="required">*</span></label>
+                                    <div class="">
+                                        <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="reporter_name" value="{{$news->reporter_name}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('categories') }}</label>
+                                    <div class="">
+                                        <select name="category" class="form-control" data-live-search="true">
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}" @if($category->category) selected @endif>
+                                                    {{$category->category}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">{{ trans('core.area') }}</label>
+                                    <div class="">
+                                        <select name="area" class="form-control" data-live-search="true">
+                                            @foreach($areas as $area)
+                                                <option value="{{$area->id}}" @if($area->warehouse_id) selected @endif>
+                                                    {{$area->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" placeholder="img_caption" name="img_caption" value="{{$news->img_caption}}" />
+
+
+                                {!! Form::file('image') !!}
+
+
+                                @if($news->image)
+                                    <img src="{!! asset('uploads/profiles/'.$news->image)!!}" class="img-responsive img-thumbnail" alt="User Image" height="200" width="200" />
+                                @else
+                                    <img src="{{asset('img/source-404.jpg')}}" class="img-responsive img-thumbnail" alt="User Image" height="100" width="100" />
+                                @endif
+
+                                </div>
+
+
+                            </div><!--col3-->
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="bg-default content-box text-center pad20A mrg25T">
+                                    <input class="btn btn-lg btn-primary" type="submit" id="submitButton" value=" @if($news->id)  {{ trans('core.edit') }} @else {{ trans('core.save') }} @endif" onclick="submitted()">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
                     </div>
 
                 </div>
+            {!! Form::close() !!}
 
 
-                <div class="form-group">
-                    {!! Form::submit($SubmitButtonText,['class'=>'form-control btn btn-primary']) !!}
-                </div>
-
-
-            </div>
-
-
-        {{ Form::close() }}
         </div>
     </div>
 
