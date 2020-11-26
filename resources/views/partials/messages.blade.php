@@ -1,5 +1,5 @@
 @if(( isset($errors) && $errors->any()) || Session::has('error') || isset($error) || Session::has('message') || isset($message))
-   <div class="row">
+   <div class="xrow">
 
 
         @if($errors->any())
@@ -19,7 +19,7 @@
                                </div>
                            </div>
                            <div class="col-auto">
-                               <i class="fas fa-times-circle fa-2x text-gray-300"></i>
+                               <i class="fa fa-times-circle fa-2x text-gray-300"></i>
                            </div>
                        </div>
                    </div>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                    <i class="fa fa-check-circle fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>

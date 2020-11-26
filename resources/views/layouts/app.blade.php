@@ -3,36 +3,44 @@
 
 @include('partials.htmlheader')
 
-<body id="page-top">
+<body class="hold-transition skin-blue sidebar-mini">
 
-<!--App-->
-<div id="app">
 <!-- Page Wrapper -->
 <div id="wrapper">
+
+@include('partials.mainheader')
+
 @include('partials.sidebar')
 <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-        @include('partials.mainheader')
-        <!-- Begin Page Content -->
-            <div class="container-fluid">
-                @include('partials.contentheader')
-                @include('partials.messages')
 
-                    @yield('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            @include('partials.contentheader')
 
-            </div>
-            <!--  End of Page Content -->
-        </div>
-        <!-- End of Main Content -->
-        @include('partials.footer')
+            @include('partials.messages')
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+
+            @yield('content')
+        </section>
+        <!-- /.content -->
     </div>
-    <!--End Content Wrapper -->
+    <!-- /.content-wrapper -->
+
+
+
 </div>
 <!--End Page Wrapper -->
-</div>
-<!--End App  -->
+
+@include('partials.footer')
+
+
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

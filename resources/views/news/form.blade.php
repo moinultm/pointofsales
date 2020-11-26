@@ -5,81 +5,46 @@
 @endsection
 
 @section('content-title')
-    News Post
+    @if($news->id)
+        {{trans('core.editing')}}: {{$news->title}}
+    @else
+        {{trans('core.add_new_news')}}
+    @endif
+@endsection
+
+@section('breadcrumb')
+    News
 @endsection
 
 @section('content')
 
-   <div class="row">
-       <div class="col-xl-12 col-lg-12">
 
-    <div class="card shadow mb-4">
+    <div class="row">
+        {!! Form::model($news, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row ', 'id' => 'ism_form']) !!}
 
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                @if($news->id)
-                    {{trans('core.editing')}}: {{$news->title}}
-                @else
-                    {{trans('core.add_new_news')}}
-                @endif
-            </h6>
-        </div>
+        <div class="col-md-9">
 
-        <div class="card-body col-xl-12 col-lg-12">
-<!--
+            <div class="box box-default">
 
--->
+                <div class="box-body" style="">
+                    <div class="row">
+                        <div class="col-md-12">
 
-            {!! Form::model($news, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row ', 'id' => 'ism_form']) !!}
-
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
                                     <label class="control-label">{{ trans('core.title') }}<span class="required">*</span></label>
                                     <div class="">
                                         <input type="text" class="form-control form-control-user" placeholder="Title" name="title" value="{{$news->title}}" />
                                     </div>
-                                </div>
 
 
-                                <div class="form-group">
                                     <label class="control-label">{{ trans('core.sub_title') }}<span class="required">*</span></label>
                                     <div class="">
                                         <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="sub_title" value="{{$news->sub_title}}" />
                                     </div>
                                 </div>
 
-
-                                    <div class="form-group">
-                                        <label class="control-label">{{ trans('core.content') }}</label>
-                                        <textarea class="form-control form-control-user" name="address">{{$news->content}}</textarea>
-                                    </div>
-
-
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('video_caption') }}</label>
-                                    <input type="text"class="form-control form-control-user" value="{{$news->video_caption}}"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('core.video_url') }}</label>
-                                    <input type="text" class="form-control form-control-user" value="{{$news->video_url}}"/>
-                                </div>
-
-                            </div><!--col9-->
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('core.is_latest') }}<span class="required">*</span></label>
-                                    <div class="">
-                                        <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="sub_title" value="{{$news->sub_title}}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
+                                <div class="col-md-4">
                                     <label class="control-label">{{ trans('core.title_color') }}<span class="required">*</span></label>
                                     <div class="">
                                         <select name="title_color" class="form-control selectcolor" data-live-search="true">
@@ -89,86 +54,180 @@
                                             </option>
                                         </select>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('core.reporter_name') }}<span class="required">*</span></label>
+                                    <label class="control-label">{{ trans('core.is_latest') }}<span class="required">*</span></label>
                                     <div class="">
-                                        <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="reporter_name" value="{{$news->reporter_name}}" />
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('categories') }}</label>
-                                    <div class="">
-                                        <select name="category" class="form-control" data-live-search="true">
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->id}}" @if($category->category) selected @endif>
-                                                    {{$category->category}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label">{{ trans('core.area') }}</label>
-                                    <div class="">
-                                        <select name="area" class="form-control" data-live-search="true">
-                                            @foreach($areas as $area)
-                                                <option value="{{$area->id}}" @if($area->warehouse_id) selected @endif>
-                                                    {{$area->name}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" placeholder="img_caption" name="img_caption" value="{{$news->img_caption}}" />
-
-
-                                {!! Form::file('image') !!}
-
-
-                                @if($news->image)
-                                    <img src="{!! asset('uploads/profiles/'.$news->image)!!}" class="img-responsive img-thumbnail" alt="User Image" height="200" width="200" />
-                                @else
-                                    <img src="{{asset('img/source-404.jpg')}}" class="img-responsive img-thumbnail" alt="User Image" height="100" width="100" />
-                                @endif
-
-                                </div>
-
-
-                            </div><!--col3-->
-
-                        </div>
-
-
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                <div class="bg-default content-box text-center pad20A mrg25T">
-                                    <input class="btn btn-lg btn-primary" type="submit" id="submitButton" value=" @if($news->id)  {{ trans('core.edit') }} @else {{ trans('core.save') }} @endif" onclick="submitted()">
                                 </div>
 
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                <label class="control-label">{{ trans('core.content') }}</label>
+                                <textarea class="form-control tinymce" name="address">{{$news->content}}</textarea>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <label class="control-label">{{ trans('core.image') }}</label>
+
+                                    <input type="text" class="form-control form-control-user" placeholder="img_caption" name="img_caption" value="{{$news->img_caption}}" />
+
+
+
+                                </div>
+                                <label class="control-label">{{ trans('core.preview') }}</label>
+
+
+                                <div class="col-md-6">
+
+                                    @if($news->image)
+                                        <img src="{!! asset('uploads/profiles/'.$news->image)!!}" class="img-responsive img-thumbnail" alt="User Image" height="200" width="200" />
+                                    @else
+                                        <img src="{{asset('img/source-404.jpg')}}" class="img-responsive img-thumbnail" alt="User Image" height="100" width="100" />
+                                    @endif
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                         <span class="input-group-btn">
+                                           <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                             <i class="fa fa-picture-o"></i> Image
+                                           </a>
+                                         </span>
+                                          <input id="thumbnail" class="form-control" type="text" name="img_url" value={{ $news->image }}>
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;">
+                                     </div>
+
+                                </div>
+
+
+
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="control-label">{{ trans('video_caption') }}</label>
+                                    <input type="text"class="form-control form-control-user" value="{{$news->video_caption}}"/>
+
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label class="control-label">{{ trans('core.video_url') }}</label>
+                                    <input type="text" class="form-control form-control-user" value="{{$news->video_url}}"/>
+                                </div>
+
+                            </div>
                         </div>
-
-
+                        <!-- /.col -->
                     </div>
+                    <!-- /.row -->
 
                 </div>
+                <!-- /.box-body -->
+                <div class="box-footer" style="text-align: right">
+                </div>
+
+            </div>
+        </div>
+        <!-- /.col 9 end -->
+        <div class="col-md-3">
+
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Publish</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label class="control-label">{{ trans('core.reporter_name') }}<span class="required">*</span></label>
+                            <div class="">
+                                <input type="text" class="form-control form-control-user" placeholder="Subtitle" name="reporter_name" value="{{$news->reporter_name}}" />
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer" style="text-align: right">
+
+                    <input class="btn btn-sm btn-primary" type="submit" id="submitButton" value=" @if($news->id)  {{ trans('core.edit') }} @else {{ trans('core.save') }} @endif" onclick="submitted()">
+
+                </div>
+            </div>
+
+
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Options</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label class="control-label">{{ trans('categories') }}</label>
+                            <div class="">
+                                <select name="category" class="form-control" data-live-search="true">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}" @if($category->category) selected @endif>
+                                            {{$category->category}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+                            <label class="control-label">{{ trans('core.area') }}</label>
+                            <div class="">
+                                <select name="area" class="form-control" data-live-search="true">
+                                    @foreach($areas as $area)
+                                        <option value="{{$area->id}}" @if($area->warehouse_id) selected @endif>
+                                            {{$area->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+
             {!! Form::close() !!}
 
-
-        </div>
-    </div>
-
-       </div><!--col-xl-8 col-lg-7-->
-   </div><!--Row-->
 
 
    <!-- User search modal -->
@@ -229,16 +288,13 @@
 
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-
+    <script src="/vendor/laravel-filemanager/js/filemanager.js"></script>
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 
     <script>
 
         function myFunction() {
-
             document.getElementById("myLocalDate").value = "2014-01-02T11:42:13.510";
-
-
         }
 
 
