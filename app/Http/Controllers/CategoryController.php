@@ -54,7 +54,7 @@ class CategoryController extends Controller
         $category->save();
 
         $message = trans('core.changes_saved');
-        return redirect()->route('category.form')->withSuccess($message);
+        return   redirect()->route('category.index')->withSuccess($message);
     }
 
 
@@ -66,7 +66,10 @@ class CategoryController extends Controller
      */
     public function getEditCategory(Category $category)
     {
-        return view('categories.form')->withCategory($category);
+
+
+        $subcategory=  Category::pluck('name', 'id');
+        return view('categories.form')->withCategory($category) ->withSubcategory($subcategory);;
     }
 
     /**

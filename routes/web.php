@@ -105,12 +105,12 @@ Route::model('category', 'App\Category');
 Route::get('category', 'CategoryController@getIndex')->name('category.index');
 Route::post('category', 'CategoryController@postIndex');
 
-Route::get('category/new', 'CategoryController@getNewCategory')->middleware('permission:category.create')->name('category.new');
-Route::post('category/new', 'CategoryController@postCategory')->middleware('permission:category.create')->name('category.post');
+Route::get('category/new', 'CategoryController@getNewCategory')->middleware('permission:user.create')->name('category.new');
+Route::post('category/new', 'CategoryController@postCategory')->middleware('permission:user.create')->name('category.post');
 
-Route::get('category/{category}', 'CategoryController@getEditCategory')->middleware('permission:category.manage')->name('category.edit');
-Route::post('category/{category}', 'CategoryController@postCategory')->middleware('permission:category.manage')->name('category.post');
-Route::delete('category/delete/{category}', 'CategoryController@deleteCategory')->middleware('permission:category.manage')->name('category.delete');
+Route::get('category/{category}', 'CategoryController@getEditCategory')->middleware('permission:user.manage')->name('category.edit');
+Route::post('category/{category}', 'CategoryController@postCategory')->middleware('permission:user.manage')->name('category.post');
+Route::delete('category/delete/{category}', 'CategoryController@deleteCategory')->middleware('permission:user.manage')->name('category.delete');
 
 
 /*========================================================

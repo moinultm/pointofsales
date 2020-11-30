@@ -10,8 +10,7 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <p class="mb-4"> </p>
+
 
     <div class="row">
         <div class="col-md-12">
@@ -28,7 +27,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
 
-                                @if(auth()->user()->can('category.create'))
+                                @if(auth()->user()->can('user.create'))
                                     <a href="{{route('category.new')}}" class="btn btn-success btn-alt btn-xs">
                                         <i class='fa fa-plus'></i>
                                         {{trans('core.add_new_category')}}
@@ -99,11 +98,11 @@
                                     <td class="text-center">{{$category->name}}</td>
                                     <td class="text-center">
                                         <ol>
-
+                                            {{$category->parent_id}}
                                         </ol>
                                     </td>
                                     <td class="text-center">
-                                        @if(auth()->user()->can('category.manage'))
+                                        @if(auth()->user()->can('user.manage'))
                                             <a href="{{route('category.edit',$category)}}" class="btn btn-info btn-alt btn-xs">
                                                 <i class="fa fa-edit"></i>
                                                 {{trans('core.edit')}}
