@@ -19,6 +19,7 @@
 @section('content')
 
 
+
     <div class="row">
         {!! Form::model($news, ['method' => 'post', 'files' => true, 'class' => 'form-horizontal bordered-row ', 'id' => 'ism_form']) !!}
 

@@ -6,10 +6,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <!-- Page Wrapper -->
-<div id="wrapper">
-
+<div class="wrapper">
 @include('partials.mainheader')
-
 @include('partials.sidebar')
 <!-- Content Wrapper -->
 
@@ -18,40 +16,21 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             @include('partials.contentheader')
-
             @include('partials.messages')
-
         </section>
-
         <!-- Main content -->
-        <section class="content container-fluid">
-
-
+        <section class="content">
             @yield('content')
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-
-
+    @include('partials.footer')
 </div>
 <!--End Page Wrapper -->
 
-@include('partials.footer')
-
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
     @section('js')
-    @include('partials.scripts')
-
-        <script>
-
-        </script>
+        @include('partials.scripts')
     @show
     </body>
 
